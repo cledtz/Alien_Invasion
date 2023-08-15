@@ -1,3 +1,5 @@
+import datetime
+
 class Settings():
     """A class to store all settings for Alien Invasion"""
     
@@ -20,13 +22,13 @@ class Settings():
         self.bullets_allowed = 5
         
         # Missile settings.
-        self.missiles_allowed = 4
+        self.missiles_allowed = 2
         
         # Alien settings.
         self.fleet_drop_speed = 50
         
         # How quickly the game speeds up
-        self.speedup_scale = 1.5
+        self.speedup_scale = 1
         # How quickly the alien point values increase
         self.score_scale = 2
         
@@ -36,7 +38,7 @@ class Settings():
     def initialize_dynamic_settings(self):
         """Initialize settings that change throughout the game."""
         self.ship_speed_factor = 5
-        self.alien_speed_factor = 2
+        self.alien_speed_factor = 0.5
         self.bullet_speed_factor = 8
         self.missile_speed_factor = 16
         

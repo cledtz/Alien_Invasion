@@ -1,5 +1,6 @@
 import pygame
 from pygame.sprite import Sprite
+import datetime
 
 class Ship(Sprite):
     
@@ -22,6 +23,9 @@ class Ship(Sprite):
         # Movement flags.
         self.moving_right = False
         self.moving_left = False
+        now = datetime.datetime.now()
+        diff = datetime.timedelta(seconds=10)
+        self.misiles_time = [now - diff] * 3
     
     def center_ship(self):
         """Put a ship in the initial position."""

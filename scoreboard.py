@@ -78,3 +78,10 @@ class Scoreboard():
         self.screen.blit(self.high_score_image, self.high_score_rect)
         self.screen.blit(self.level_image, self.level_rect)
         self.ships.draw(self.screen)
+
+    def show_win_message(window):
+        font = pygame.font.Font('freesansbold.ttf', 32)
+        text = font.render('HelloWorld!', True, (0,0,0), (255, 255, 255))
+        textRect = text.get_rect()
+        textRect.center = (1200 // 2, 800 // 2)
+        window.blit(text, textRect)
