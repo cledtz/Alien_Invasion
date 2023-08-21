@@ -18,8 +18,10 @@ class Alien(Sprite):
         delete = False
         
         # Start each new alien near the top lever of the screen.
-        self.rect.x = self.rect.width/2
-        self.rect.y = self.rect.height/2
+        self.rect.x = self.rect.width / 2
+        self.rect.y = self.rect.height / 2
+
+        self.rectcall = self.image.get_rect()
         
         # Store the alien's exact position.
         self.x = float(self.rect.x)
@@ -33,7 +35,6 @@ class Alien(Sprite):
 
     def blitme(self, screen):
         """Draw the alien at its current location."""
-        # self.screen.blit(self.image, self.rect)
         if self.health >= 1:
             h_box1 = (self.rect.x + 25, self.rect.y - 15, 10, 10)
             h_box2 = (h_box1[0] + 15, self.rect.y - 15, 10, 10)

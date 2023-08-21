@@ -1,6 +1,9 @@
 class GameStats():
     """Track statistics for Alien Invasion."""
     
+
+    xcount = 0
+
     def __init__(self, ai_settings):
         """Initialize statistics"""
         self.score = 0

@@ -44,6 +44,8 @@ class Settings():
         
         # Scoring
         self.alien_points = 35
+
+        self.alien_bullets_allowed = 0
         
     
     def increase_speed(self):
