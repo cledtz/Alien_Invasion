@@ -22,7 +22,7 @@ def run_game():
 
     # Make the Play button.
     play_button = Button(ai_settings, screen, "Deploy", stats)
-    play_again_button = Button(ai_settings, screen, "Play again..", stats)
+    play_again_button = Button(ai_settings, screen, "Try again..", stats)
 
     # Make a group to store bullets in.
     bullets = Group()
@@ -58,7 +58,7 @@ def run_game():
             gf.check_collisions_b(ai_settings, screen, stats, sb, ship, aliens, bullets, missiles, alien_bullets)
             gf.check_collisions_m(ai_settings, screen, stats, sb, ship, aliens, bullets, missiles, alien_bullets)
             gf.check_collisions_s(ai_settings, screen, stats, sb, ship, aliens, bullets, missiles, alien_bullets)
-            gf.update_aliens(ai_settings, aliens, screen, alien_bullets)
+            gf.update_aliens(ai_settings, aliens, screen, alien_bullets, stats)
             gf.remove_expired(aliens)
             gf.check_alien_ship_collisions(ai_settings, screen, stats, sb, ship, aliens, missiles, bullets, alien_bullets)
             gf.check_aliens_bottom(ai_settings, screen, stats, sb, ship, aliens, missiles, bullets, alien_bullets)

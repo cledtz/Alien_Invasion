@@ -18,7 +18,7 @@ from game_stats import GameStats
 def alien_fire_bullet(ai_settings, screen, alien, alien_bullets):
     """Create a new bullet and add it to the bullets group."""
     if len(alien_bullets) < ai_settings.alien_bullets_allowed:
-        new_bullet = Bullet(ai_settings, screen, alien, -1, 1.1)
+        new_bullet = Bullet(ai_settings, screen, alien, -1, 0.5) #direction & bullet speed
         if alien.image != alien.explosion:
            alien_bullets.add(new_bullet)
 
@@ -107,7 +107,7 @@ def make_explode(hit_aliens, health_removed=1):
         if alien.health <= 0:
             alien.image = alien.explosion
             now = datetime.datetime.now()
-            diff = datetime.timedelta(milliseconds=500)
+            diff = datetime.timedelta(milliseconds=500) #500ms display time till removal
             comp = now + diff
             alien.exploded = comp
             if alien.health != -1:
@@ -123,7 +123,7 @@ def check_collisions_b(ai_settings, screen, stats, sb, ship, aliens, bullets, mi
     # Remove any bullets and aliens that have collided.
     b_collisions = pygame.sprite.groupcollide(bullets, aliens, True, False)
     for hit_aliens in b_collisions.values():
-        make_explode(hit_aliens, 1)
+        make_explode(hit_aliens, 1) #remove health, bullet = 1
         stats.score += ai_settings.alien_points * len(hit_aliens)
         sb.prep_score()
     check_high_score(stats, sb)
@@ -143,7 +143,7 @@ def check_collisions_m(ai_settings, screen, stats, sb, ship, aliens, bullets, mi
     # Remove any bullets and aliens that have collided.
     m_collisions = pygame.sprite.groupcollide(missiles, aliens, True, False)
     for hit_aliens in m_collisions.values():
-        make_explode(hit_aliens, 2)
+        make_explode(hit_aliens, 2) #remove health, missile = 2
 
         stats.score += ai_settings.alien_points * len(hit_aliens)
         sb.prep_score()
@@ -202,10 +202,10 @@ def get_number_rows(ai_settings, ship_height, alien_height, stats):
 
 def create_alien(ai_settings, screen, aliens, alien_number, row_number):
     """Create an alien and place it in the row."""
-    alien_health = random.randrange(1, 4)
+    alien_health = random.randrange(1, 4) # generate random health
     alien = Alien(ai_settings, screen, alien_health)
-    alien.x = alien.rect.width/2 * (2 + (-1) ** row_number) + 1.5 * alien.rect.width * alien_number
-    alien.y = 50 + alien.rect.height/2 + 1.5 * alien.rect.height * row_number
+    alien.x = alien.rect.width / 2 * (2 + (-1) ** row_number) + 1.5 * alien.rect.width * alien_number
+    alien.y = 50 + alien.rect.height / 2 + 1.5 * alien.rect.height * row_number
     alien.rect.x = alien.x
     alien.rect.y = alien.y
     alien.direction *= (-1)**row_number
@@ -238,14 +238,16 @@ def check_fleet_edges(ai_settings, aliens):
             change_fleet_direction(ai_settings, aliens)
             break
     
-def update_aliens(ai_settings, aliens, screen, alien_bullets):
+def update_aliens(ai_settings, aliens, screen, alien_bullets, stats):
     """
     Check if the fleet is at an edge,
         and then update the position of all aliens in the fleet.
     """
     check_fleet_edges(ai_settings, aliens)
     aliens.update()
-    ai_settings.alien_bullets_allowed = len(aliens) / 2
+    ai_settings.alien_bullets_allowed = len(aliens) / (2 + stats.games_won) # aliens devided by rows
+    #print(ai_settings.alien_bullets_allowed)
+
     for alien in reversed(aliens.spritedict):
         alien_fire_bullet(ai_settings, screen, alien, alien_bullets)
     
