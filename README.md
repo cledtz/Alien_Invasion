@@ -8,6 +8,6 @@ To move ship right/left use right/left arrows. The space key fires bullets and t
 
 Project forked from: https://github.com/JurajX/Alien_Invasion
 
-Added modes, explosions etc. This project was mainly redone to learn python.
+Added more features & cleaned up the source. This project was mainly redone to learn python, its still shit though.
 
 Requires python@3.9
