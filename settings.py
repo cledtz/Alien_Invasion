@@ -15,14 +15,19 @@ class Settings():
         # Ship settings.
         self.ship_limit = 3
         
+        self.max_possible_alien_rows = 13
+        self.max_alien_rows = 10
+        self.alien_row_multiplier = 1
+        
         # Bullet settings.
         self.bullet_width = 4
         self.bullet_height = 10
         self.bullet_color = (250, 0 , 0)
-        self.bullets_allowed = 5
+        self.bullets_allowed = 10000
         
         # Missile settings.
-        self.missiles_allowed = 2
+        self.missiles_allowed = 5
+        self.missile_shoot_delay = 3
         
         # Alien settings.
         self.fleet_drop_speed = 50
@@ -31,6 +36,16 @@ class Settings():
         self.speedup_scale = 1
         # How quickly the alien point values increase
         self.score_scale = 2
+
+
+        self.spacing = 1.5
+        self.on_missile_hit_health_removal = 2
+        self.on_bullet_hit_health_removal = 1
+
+        self.explosion_time_length_ms = 500
+
+        self.alien_bullet_speed = 0.5
+        self.alien_bullet_direction = -1
         
         self.initialize_dynamic_settings()
         
